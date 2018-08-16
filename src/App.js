@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.css";
 
 import Person from "./Person/Person";
 
@@ -14,32 +14,22 @@ class App extends Component {
   };
 
   render() {
-    const buttonStyle = {
-      backgroundColor: this.state.showPersons ? "red" : "green",
-      color: "white",
-      fontWeight: "bold",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-      ":hover": {
-        backgroundColor: this.state.showPersons ? "lightgreen" : "lightred",
-        color: "black"
-      }
-    };
-
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push("red");
+      assignedClasses.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push("bold");
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi I'm a react app</h1>
-        <p className={classes.join(" ")}>This is really working!</p>
-        <button style={buttonStyle} onClick={this.tooglePersonsHadnler}>
+        <p className={assignedClasses.join(" ")}>This is really working!</p>
+        <button
+          className={this.state.showPersons()}
+          onClick={this.tooglePersonsHadnler}
+        >
           {this.state.showPersons ? "Hide the persons" : "Show the perons"}
         </button>
         {this.renderPersons()}
